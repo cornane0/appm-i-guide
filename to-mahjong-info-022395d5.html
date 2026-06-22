@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>麻将胡了 · 简明指南与访问提醒</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: #f4f8fa;
+      color: #1a2b3c;
+      line-height: 1.6;
+      padding: 20px 16px 48px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* ——— 杂志式横幅 ——— */
+    .magazine-hero {
+      background: linear-gradient(145deg, #0f3950 0%, #1b5f75 100%);
+      border-radius: 28px 28px 28px 28px;
+      padding: 36px 28px 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 12px 28px -8px rgba(11, 48, 64, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .magazine-hero::after {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(200, 240, 255, 0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .magazine-hero h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #dff3fb;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .magazine-hero .subhead {
+      font-size: 1.1rem;
+      color: #b8dae8;
+      max-width: 70%;
+      border-left: 4px solid #6db0c7;
+      padding-left: 18px;
+    }
+
+    .magazine-hero .hero-note {
+      display: inline-block;
+      margin-top: 24px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(2px);
+      padding: 8px 16px 8px 20px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #d4edf7;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 540px) {
+      .magazine-hero { padding: 28px 20px 32px; }
+      .magazine-hero h1 { font-size: 1.8rem; }
+      .magazine-hero .subhead { max-width: 100%; font-size: 1rem; }
+    }
+
+    /* ——— 三段式自然介绍 ——— */
+    .section-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 30px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 16px rgba(0, 30, 40, 0.05);
+      border: 1px solid #e2edf2;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .section-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 55, 75, 0.08);
+    }
+
+    .section-card h2 {
+      font-size: 1.5rem;
+      font-weight: 550;
+      color: #14566e;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-card h2::before {
+      content: '▣';
+      font-size: 1.3rem;
+      color: #2c8ba5;
+      opacity: 0.7;
+    }
+
+    .section-card p {
+      margin-bottom: 14px;
+      color: #1f3845;
+    }
+
+    .section-card p:last-child { margin-bottom: 0; }
+
+    .highlight-term {
+      color: #1b7088;
+      font-weight: 500;
+    }
+
+    .grid-tip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .grid-tip .tip-item {
+      background: #eef6fa;
+      padding: 10px 18px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #135166;
+      border: 1px solid #cfe2eb;
+    }
+
+    /* ——— 特点网格卡片 ——— */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .feature-card {
+      background: #f2f9fc;
+      border-radius: 20px;
+      padding: 22px 18px;
+      border-left: 4px solid #2c8ba5;
+    }
+
+    .feature-card .title {
+      font-weight: 600;
+      color: #0a4356;
+      margin-bottom: 6px;
+    }
+
+    .feature-card .desc {
+      font-size: 0.95rem;
+      color: #2c4a57;
+    }
+
+    @media (max-width: 540px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .section-card { padding: 24px 18px; }
+    }
+
+    /* ——— 访问提醒 & FAQ 风格 ——— */
+    .access-reminder {
+      background: #e1f0f5;
+      border-radius: 24px;
+      padding: 28px 28px 32px;
+      margin: 30px 0 20px;
+      border: 1px solid #bfd9e4;
+    }
+
+    .access-reminder h3 {
+      font-size: 1.3rem;
+      font-weight: 550;
+      color: #0c4459;
+      margin-bottom: 16px;
+    }
+
+    .faq-snippet {
+      margin-top: 16px;
+      background: white;
+      border-radius: 18px;
+      padding: 18px 22px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .faq-snippet strong {
+      color: #175f78;
+    }
+
+    .faq-snippet p {
+      color: #1f3845;
+    }
+
+    /* ——— 页尾 ——— */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 28px;
+      border-top: 1px solid #cfdfe7;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #3d6373;
+    }
+
+    .inline-link {
+      color: #1b6f89;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dashed #91bccf;
+    }
+
+    .inline-link:hover {
+      color: #0b4053;
+      border-bottom-style: solid;
+    }
+
+    .meta-note {
+      font-size: 0.85rem;
+      color: #547a8a;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- 杂志横幅 -->
+  <div class="magazine-hero">
+    <h1>麻将胡了 · 简明指南</h1>
+    <div class="subhead">规则精要与场景提示，一份扎实的入门参考</div>
+    <div class="hero-note">📘 基于民间通行的立直 / 国标规则整理</div>
+  </div>
+
+  <!-- 第一段：背景与定位 -->
+  <div class="section-card">
+    <h2>从一局牌说起</h2>
+    <p>麻将胡了不只是最终宣告胜利的那一声，它更是一整套牌型判断、番数计算与策略取舍的浓缩。对于刚接触麻将游戏的朋友，理解「胡牌」的基本门槛——四组面子加一对将牌，以及各种特殊牌型——是快速融入桌面的第一步。</p>
+    <p>而真正让玩家感到趣味的，往往是不同规则下对「胡」的解读差异：国标麻将强调番种组合，日本麻将重视防守与役种约束，广东麻将则更讲求手气与节奏。正因如此，一套可靠的参考资源就显得十分必要。</p>
+    <div class="grid-tip">
+      <span class="tip-item">✅ 基础胡牌型</span>
+      <span class="tip-item">✅ 七对子·十三幺</span>
+      <span class="tip-item">✅ 不求人与自摸</span>
+    </div>
+  </div>
+
+  <!-- 第二段：特点与场景 -->
+  <div class="section-card">
+    <h2>实用场景与节奏</h2>
+    <p>无论是四人线下聚会，还是在线约局，快速查阅役种定义、番数上限以及食和规则都能减少争议。比如「平和」「断幺九」这类常见役种，在不同规则中门槛稍有不同；而「一发」「海底摸月」等特殊场景，亦需要明确的定义备忘。</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="title">🎯 简明番表</div>
+        <div class="desc">从 1 番到 役满，常见役种与组合条件，一表可查。</div>
+      </div>
+      <div class="feature-card">
+        <div class="title">🔄 规则对照</div>
+        <div class="desc">国标、立直、广东、日本麻将的胡牌门槛差异。</div>
+      </div>
+      <div class="feature-card">
+        <div class="title">🧠 防守提示</div>
+        <div class="desc">安牌推理、筋牌与壁牌的基本逻辑，降低放铳率。</div>
+      </div>
+      <div class="feature-card">
+        <div class="title">📱 移动适配</div>
+        <div class="desc">在手机上也能流畅查阅，适合桌边快速确认。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三段：指南与链接 -->
+  <div class="section-card">
+    <h2>从知识到实践</h2>
+    <p>积累规则知识的最好方式，是在实战中反复验证。在 <a href="https://to-mahjong.com" class="inline-link">麻将胡了</a> 这个页面里，你可以找到包括役种一览、算番示例、特殊规则解释以及常见问题在内的内容模块。它更像一本轻量的案头手册，而非刻板的教程。</p>
+    <p>建议在开始一局游戏前，先花几分钟熟悉你所在房间采用的规则版本：起和番数是多少？是否有食断、后付、包牌等特殊约定？这些细节往往决定了整局游戏的策略走向。</p>
+    <p>另外，如果你对竞技麻将的计分系统感兴趣，站点中也收录了部分历史番种演变和地域性差异的简述，能帮助你更全面理解「胡」背后的逻辑。</p>
+  </div>
+
+  <!-- 访问提示 + FAQ 摘要 -->
+  <div class="access-reminder">
+    <h3>📌 访问提醒与常见疑惑</h3>
+    <div class="faq-snippet">
+      <p><strong>为什么同一副牌在不同规则里番数不同？</strong> 因为各地麻将的番种定义和起和标准不同。例如「纯全带幺」在国标中为 4 番，而在某些地方规则中可能不计。所以建议以你当前使用的规则为准。</p>
+    </div>
+    <div class="faq-snippet">
+      <p><strong>「麻将胡了」这个资源适合新手吗？</strong> 是的，内容从基础牌型开始，逐步扩展到复合役种和进阶防守，同时也包含老手可能忽略的细节对照。</p>
+    </div>
+    <div class="faq-snippet">
+      <p><strong>需要注册或付费才能使用吗？</strong> 不需要，页面上的所有指南、表格和说明均公开可读，访问 <a href="https://to-mahjong.com" class="inline-link">麻将胡了</a> 即可直接查阅。</p>
+    </div>
+  </div>
+
+  <!-- 页尾 -->
+  <div class="page-footer">
+    <p>— 以知识型视角梳理麻将胡了的基础与场景 —</p>
+    <p class="meta-note">内容基于通用麻将规则整理，具体以当地或房规为准。</p>
+  </div>
+
+</div>
+</body>
+</html>
